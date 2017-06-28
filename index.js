@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 
 app.get('/', (req, res)=>{
-	res.send('Hello world, I am JD\'s chatbot')
+	res.send(1872758485)
 })
 
 app.get('/webhook/', (req, res)=>{
