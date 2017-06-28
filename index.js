@@ -14,7 +14,7 @@ app.get('/', (req, res)=>{
 	res.send("This is the HBL Facebook Bot")
 })
 
-app.get('/webhook', (req, res)=>{
+app.get('/webhook/', (req, res)=>{
 	if (req.query['hub.mode'] === 'subscribe' &&
       req.query['hub.verify_token'] ==='this_is_my_token'){
 				console.log("Validating webhook");
