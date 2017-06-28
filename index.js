@@ -8,7 +8,7 @@ app.set('port', (process.env.PORT || 3000))
 
 app.use(bodyParser.urlencoded({extended:false}))
 
-app.use(bodyParser.json)
+app.use(bodyParser.json())
 
 app.get('/', function(req, res){
 	res.send('Hello world, I am JD\'s chatbot')
