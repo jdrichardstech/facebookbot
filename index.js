@@ -14,16 +14,20 @@ app.get('/', (req, res)=>{
 	res.send("This is the HBL Facebook Bot")
 })
 
-app.get('/webhook/', (req, res)=>{
-	if(req.query['hub.verify_token']==='this_is_my_token'){
-		res.send(req.query['hub.challenge'])
-	}
-	res.send('Error, wrong token')
+app.get('/webhook', (req, res)=>{
+	if (req.query['hub.mode'] === 'subscribe' &&
+      req.query['hub.verify_token'] ==='this_is_my_token'){
+				console.log("Validating webhook");
+		    res.status(200).send(req.query['hub.challenge']);
+	} else {
+    console.error("Failed validation. Make sure the validation tokens match.");
+    res.sendStatus(403);
+  }
 })
 
 
 
-const token = 'EAAQNLEIhmisBAA0WCNUP7gqBEQZBcEmDrTZBL6XcxlnY33282dAWpANOsatgZCTCIhHqX3gNu99fJXjn5lh1dhrU8IsVZC8iwnrqW2hbY0TxTGr5NoIyCgDjECuylBVwNHITPI7M7kJt5xqiFbcMQaHiS7wsY7qTeJWV17ZAKMRJQzjgTvhI3UNuWbmZA9zWwZD'
+const token = 'EAAQNLEIhmisBANzygGhCleI2LhxfZAmTsOr3mrixDjFl3MC4ZBtZB2AH1z9s2v7dLCXjZCcdSTpg3mXc96VK5sUy2gZBRTfsArhy9qZBKGl7ciXNRfI4jzymJWfZAl4F8BYa5yRjIp9e014YtohjZBIFZAWJxx1doK3rF8m8Wn88MB3S3mudw8vgCUshUET9nk2YZD'
 
 
 function sendTextMessage(sender, text){
