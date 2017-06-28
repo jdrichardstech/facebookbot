@@ -26,13 +26,13 @@ app.get('/webhook/', (req, res)=>{
 const token = 'EAAQNLEIhmisBAA0WCNUP7gqBEQZBcEmDrTZBL6XcxlnY33282dAWpANOsatgZCTCIhHqX3gNu99fJXjn5lh1dhrU8IsVZC8iwnrqW2hbY0TxTGr5NoIyCgDjECuylBVwNHITPI7M7kJt5xqiFbcMQaHiS7wsY7qTeJWV17ZAKMRJQzjgTvhI3UNuWbmZA9zWwZD'
 
 
-let sendTextMessage = (sender, text)=>{
+function sendTextMessage(sender, text){
 	messageData = {
 		text:text
 	}
 }
 
-	let sendGenericMessage=(sender)=> {
+	function sendGenericMessage(sender){
 		 let messageData = {
 			 "attachment": {
 				 "type": "template",
