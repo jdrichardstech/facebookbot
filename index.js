@@ -65,54 +65,51 @@ function callSendAPI(messageData) {
   });
 }
 
-	function sendGenericMessage(sender){
-		 let messageData = {
-			 "attachment": {
-				 "type": "template",
-				 "payload": {
-				 "template_type": "generic",
-					 "elements": [{
-					 "title": "First card",
-						 "subtitle": "Element #1 of an hscroll",
-						 "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
-						 "buttons": [{
-							 "type": "web_url",
-							 "url": "https://www.messenger.com",
-							 "title": "web url"
-						 }, {
-							 "type": "postback",
-							 "title": "Postback",
-							 "payload": "Payload for first element in a generic bubble",
-						 }],
-					 }, {
-						 "title": "Second card",
-						 "subtitle": "Element #2 of an hscroll",
-						 "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
-						 "buttons": [{
-							 "type": "postback",
-							 "title": "Postback",
-							 "payload": "Payload for second element in a generic bubble",
-						 }],
-					 }]
-				 }
-			 }
-		 }
-	request({
-		url:'https:/graph.facebook.com/v2.6/me/messages',
-		qs:{access_token: token},
-		method: 'POST',
-		json: {
-			recipient: {id: sender},
-			message: messageData,
-		}
-	},
-		function(error, response, body){
-			if(error){
-				console.log("Error sending messages: ", error)
-			}else if (response.body.error){
-				console.log("Error: ", response.body.error)
-			}
-	})
+function sendGenericMessage(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "generic",
+          elements: [{
+            title: "rift",
+            subtitle: "Next-generation virtual reality",
+            item_url: "https://www.oculus.com/en-us/rift/",
+            image_url: "http://messengerdemo.parseapp.com/img/rift.png",
+            buttons: [{
+              type: "web_url",
+              url: "https://www.oculus.com/en-us/rift/",
+              title: "Open Web URL"
+            }, {
+              type: "postback",
+              title: "Call Postback",
+              payload: "Payload for first bubble",
+            }],
+          }, {
+            title: "touch",
+            subtitle: "Your Hands, Now in VR",
+            item_url: "https://www.oculus.com/en-us/touch/",
+            image_url: "http://messengerdemo.parseapp.com/img/touch.png",
+            buttons: [{
+              type: "web_url",
+              url: "https://www.oculus.com/en-us/touch/",
+              title: "Open Web URL"
+            }, {
+              type: "postback",
+              title: "Call Postback",
+              payload: "Payload for second bubble",
+            }]
+          }]
+        }
+      }
+    }
+  } 
+
+  callSendAPI(messageData);
 }
 
 app.post('/webhook', function (req, res) {
